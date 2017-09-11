@@ -8,10 +8,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+        "indent": [2, 4, {"SwitchCase": 1}],
         "linebreak-style": [
             "error",
             "unix"

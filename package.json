@@ -4,7 +4,8 @@
   "description": "Pivotal Tracker Protractor Automation Framework",
   "main": "protractor.jasmine.conf.js",
   "scripts": {
-    "test": "protractor protractor.jasmine.conf.js"
+    "test": "protractor protractor.jasmine.conf.js",
+    "lint": "eslint --fix 'test/**/*.js' --cache"
   },
   "repository": {
     "type": "git",
