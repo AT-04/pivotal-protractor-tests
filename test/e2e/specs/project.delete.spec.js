@@ -1,37 +1,28 @@
 'use strict';
 
-describe('Delete a Project', function () {
-    const loginPage = require('../pages/login.page');
-    const dashboardPage = require('../pages/dashboard.page');
-    const requestManager = require('../../api/request.manager');
-    const project = require('../pages/projects/projects.page');
-    const projectSetting = require('../pages/projects/setting.page');
-    const common = require('../pages/common');
+const loginPage = require('../pages/login.po');
+const dashboardPage = require('../pages/dashboard.po');
+const requestManager = require('../../api/request.manager');
+const projectSetting = require('../pages/projects/setting.po');
+const navigator = require('../pages/navigator');
+
+describe('Delete Projects', () => {
     let id;
-
-    beforeAll(function* () {
-        yield loginPage.loginAs(browser.params.username, browser.params.password);
-        expect(dashboardPage.getPageTitle()).toBe('Dashboard - Pivotal Tracker');
+    beforeAll(async () => {
+        await loginPage.loginAs(browser.params.username, browser.params.password);
     });
 
-    beforeEach(function* () {
-        yield requestManager.post('/projects', {'name': 'demoProject'});
+    beforeEach(async () => {
+        await requestManager.post('/projects', {'name': 'demoProject'});
         id = requestManager.getResponse().id;
-        expect(requestManager.getStatus()).toBe(200);
+        expect(await requestManager.getStatus()).toBe(200);
+        await navigator.goesToDashboard();
     });
 
-    it('Delete the project', function* () {
-        yield common.goesToDashboard();
-        yield dashboardPage.clickProjectSettings('demoProject');
-        yield projectSetting.clickDeleteLabel();
-        yield projectSetting.clickConfirmDeleteButton();
-    });
-
-    it('Delete the project since project page', function* () {
-        yield common.goesToDashboard();
-        yield dashboardPage.clickProjectName('demoProject');
-        yield project.clickSettingsTabButton();
-        yield projectSetting.clickDeleteLabel();
-        yield projectSetting.clickConfirmDeleteButton();
+    it('Delete the project', async () => {
+        await dashboardPage.clickProjectSettings('demoProject');
+        await projectSetting.clickDeleteLabel();
+        await projectSetting.clickConfirmDeleteButton();
+        expect(dashboardPage.getNoticeMessage()).toContain(' was successfully deleted.');
     });
 });

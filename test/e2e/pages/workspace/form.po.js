@@ -10,7 +10,7 @@ class WorkspaceForm {
      */
     constructor() {
         this.workSpaceNameInputField = element(by.className('tc-form__input'));
-        this.createWorkSpaceBtn = element(by.xpath('//button[@data-aid="FormModal__submit"]'));
+        this.createWorkSpaceBtn = $('button[data-aid="FormModal__submit"]');
     }
 
     /**
@@ -27,8 +27,7 @@ class WorkspaceForm {
      * @returns {Promise.<TResult>} Promise.
      */
     setNameWorkspace(name) {
-        return browser.wait(() => EC.presenceOf(this.workSpaceNameInputField), 6000)
-            .then(() => this.workSpaceNameInputField.clear())
+        return this.workSpaceNameInputField.clear()
             .then(() => this.workSpaceNameInputField.sendKeys(name));
     }
 

@@ -2,21 +2,17 @@
   "name": "pivotal-protractor-tests",
   "version": "1.0.0",
   "description": "Pivotal Tracker Protractor Automation Framework",
-  "main": "protractor.jasmine.conf.js",
+  "main": "protractor.conf.js",
   "scripts": {
-    "test": "protractor protractor.jasmine.conf.js",
-    "lint": "eslint --fix 'test/**/*.js' --cache"
+    "test": "protractor protractor.conf.js",
+    "lint": "eslint --fix './**/*.js' --cache"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AT-04/pivotal-protractor-tests.git"
   },
-  "keywords": [
-    "Pivotal",
-    "Tracker",
-    "Protractor"
-  ],
-  "author": "Fundacion-Jala",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AT-04/pivotal-protractor-tests/issues"
@@ -27,10 +23,9 @@
   },
   "devDependencies": {
     "axios": "^0.16.2",
-    "eslint": "^4.6.1",
-    "eslint-plugin-protractor": "^1.40.0",
-    "jasmine-co": "1.2.2",
-    "jasmine-reporters": "^2.2.1",
-    "protractor": "^5.1.2"
+    "eslint": "^4.19.1",
+    "eslint-plugin-protractor": "^1.40.2",
+    "jasmine-spec-reporter": "^4.2.1",
+    "protractor": "^5.4.0"
   }
 }
