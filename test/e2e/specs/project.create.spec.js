@@ -1,35 +1,31 @@
 'use strict';
 
-describe('Create new Project', function () {
-    const loginPage = require('../pages/login.page');
-    const dashboardPage = require('../pages/dashboard.page');
-    const requestManager = require('../../api/request.manager');
-    const project = require('../pages/projects/projects.page');
-    const projectForm = require('../pages/projects/form.page');
-    const common = require('../pages/common');
-    let id;
+const loginPage = require('../pages/login.po');
+const dashboardPage = require('../pages/dashboard.po');
+const requestManager = require('../../api/request.manager');
+const project = require('../pages/projects/projects.po');
+const projectForm = require('../pages/projects/form.po');
+const navigator = require('../pages/navigator');
 
-    beforeAll(function* () {
-        yield loginPage.loginAs(browser.params.username, browser.params.password);
-        expect(dashboardPage.getPageTitle()).toBe('Dashboard - Pivotal Tracker');
+describe('Create Project', () => {
+    beforeEach(async () => {
+        await loginPage.loginAs(browser.params.username, browser.params.password);
+        await navigator.goesToDashboard();
     });
 
-
-    it('Create a project', function* () {
-        yield common.goesToDashboard();
-        yield dashboardPage.clickProjectButton();
-        yield projectForm.setNameInputField('newDemoProject');
-        yield projectForm.clickAccountSelector();
-        yield projectForm.setNewAccountNameInputField('account1');
-        yield projectForm.clickCreateProjectButton();
-        expect(project.getProjectName()).toContain('newDemoProject');
+    it('Create a project', async () => {
+        let projectName = 'NewDemoProject';
+        await dashboardPage.clickProjectButton();
+        await projectForm.setNameInputField(projectName);
+        await projectForm.setTxtSelectorAccountSpecific('account1');
+        await projectForm.clickCreateProjectButton();
+        expect(await project.getProjectName()).toBe(projectName);
     });
 
-    afterEach(function* () {
-        yield requestManager.del(`/projects/${id}`);
-        expect(requestManager.getStatus()).toBe(204);
-    });
-
-    afterAll(function* () {
+    afterEach(async () => {
+        await requestManager.get('/projects');
+        let id = requestManager.getResponse()[0].id;
+        await requestManager.del(`/projects/${id}`);
+        expect(await requestManager.getStatus()).toBe(204);
     });
 });

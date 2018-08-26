@@ -1,6 +1,6 @@
 'use strict';
 
-const Common = require('../common.js');
+const Common = require('../common');
 
 /**
  * Page Object for Project Setting.
@@ -13,7 +13,7 @@ class ProjectSetting {
     constructor() {
         this.deleteLabel = element(by.id('delete_link'));
         this.confirmDeleteButton = element(by.id('confirm_delete'));
-        this.changesSuccessLabel = $('div[id=save_success_bar] > div');
+        this.changesSuccessLabel = $('#save_success_bar > div');
         this.projectNameInputField = element(by.id('project_name'));
         this.saveButton = element(by.className('save_bar__submit'));
         this.errorMessage = element(by.className('error_above_or_below'));
@@ -48,7 +48,8 @@ class ProjectSetting {
      * Click the Save Button.
      */
     clickSaveButton() {
-        return this.saveButton.click();
+        return this.saveButton.click()
+            .then(() => browser.switchTo().alert().accept());
     }
 
     /**

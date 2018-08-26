@@ -11,17 +11,10 @@ class Common {
      * @param inputString String value.
      * @returns {Promise.<TResult>} Promise.
      */
-    setInputField(webElement, inputString) {
+    static setInputField(webElement, inputString) {
         return webElement.clear()
             .then(() => webElement.sendKeys(inputString));
     }
-
-    /**
-     * Goes to the Dashboard page.
-     */
-    goesToDashboard() {
-        return element(by.css('.tc_header_item.tc_header_logo')).click();
-    }
 }
 
-module.exports = new Common();
+module.exports = Common;

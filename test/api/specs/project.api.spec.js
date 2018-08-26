@@ -1,22 +1,22 @@
 'use strict';
 
-describe('Test all API request', function () {
-    const requestManager = require('../request.manager');
+const requestManager = require('../request.manager');
+
+describe('Test all API request', () => {
     let id;
-
-    it('Send a POST request to Projects', function* () {
-        yield requestManager.post('/projects', {'name': 'demoProject1'});
+    it('Send a POST request to Projects', async () => {
+        await requestManager.post('/projects', {'name': 'demoProject1'});
         id = requestManager.getResponse().id;
-        expect(requestManager.getStatus()).toBe(200);
+        expect(await requestManager.getStatus()).toBe(200);
     });
 
-    it('Send a PUT request to Projects', function* () {
-        yield requestManager.put(`/projects/${id}`, {'name': 'demoProjectUpdated'});
-        expect(requestManager.getStatus()).toBe(200);
+    it('Send a PUT request to Projects', async () => {
+        await requestManager.put(`/projects/${id}`, {'name': 'demoProjectUpdated'});
+        expect(await requestManager.getStatus()).toBe(200);
     });
 
-    it('Send a Delete request the Project', function* () {
-        yield requestManager.del(`/projects/${id}`);
-        expect(requestManager.getStatus()).toBe(204);
+    it('Send a Delete request the Project', async () => {
+        await requestManager.del(`/projects/${id}`);
+        expect(await requestManager.getStatus()).toBe(204);
     });
 });

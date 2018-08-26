@@ -1,6 +1,6 @@
 'use strict';
 
-const Common = require('../common.js');
+const Common = require('../common');
 
 /**
  * Page Object for Project Forms.
@@ -71,8 +71,9 @@ class ProjectForm {
      * @param accountName String with Account value.
      * @returns {Promise.<TResult>} Promise.
      */
-    createNewAccount(accountName) {
-        return this.clickCreateNewAccountSelectOption()
+    setTxtSelectorAccountSpecific(accountName) {
+        return this.clickAccountSelector()
+            .then(() => this.clickCreateNewAccountSelectOption())
             .then(() => this.setNewAccountNameInputField(accountName));
     }
 }

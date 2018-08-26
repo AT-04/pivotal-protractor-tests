@@ -1,6 +1,7 @@
 module.exports = {
     "env": {
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "plugins": ["protractor"],
     "extends": "plugin:protractor/recommended",
@@ -22,4 +23,7 @@ module.exports = {
             "always"
         ]
     },
+    "parserOptions": {
+       "ecmaVersion": 2017
+    }
 };

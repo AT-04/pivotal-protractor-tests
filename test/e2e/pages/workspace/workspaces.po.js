@@ -11,8 +11,6 @@ class Workspace {
     constructor() {
         this.workSpacesName = element(by.className('raw_context_name'));
         this.settingWorkspace = $('a[data-aid=\'navTab-settings\']');
-        this.noticeMessage = element(by.id('notice'));
-
     }
 
     /**
@@ -37,15 +35,6 @@ class Workspace {
     clickSettingsNavTab() {
         return this.settingWorkspace.click();
     }
-
-    /**
-     * Return the Notice Message.
-     * @returns {string} Notice Message value.
-     */
-    getNoticeMessage() {
-        return this.noticeMessage.getText();
-    }
-
 }
 
 module.exports = new Workspace();
