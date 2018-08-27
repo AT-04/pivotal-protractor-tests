@@ -1,6 +1,9 @@
 'use strict';
 
 const axios = require('axios');
+axios.defaults.baseURL = browser.params.apiBaseUrl;
+axios.defaults.responseType = 'json';
+axios.defaults.headers.common['X-TrackerToken'] = browser.params.token;
 
 /**
  * Request manager class with Axios for API calls.
@@ -8,28 +11,16 @@ const axios = require('axios');
 class RequestManager {
 
     /**
-     * Default Constructor.
-     */
-    constructor() {
-        this.service = axios.create({
-            baseURL: browser.params.apiBaseUrl,
-            headers: {
-                'X-TrackerToken': browser.params.token
-            }
-        });
-    }
-
-    /**
      * Return the response of the API Request calls.
      */
-    getResponse() {
+    static getResponse() {
         return this.response.data;
     }
 
     /**
      * Return the status of the API Request calls.
      */
-    getStatus() {
+    static getStatus() {
         return this.status;
     }
 
@@ -37,7 +28,7 @@ class RequestManager {
      * Set the Response and Status after Success API calls.
      * @param response Response.
      */
-    success(response) {
+    static success(response) {
         this.response = response;
         this.status = response.status;
     }
@@ -46,38 +37,38 @@ class RequestManager {
      * Set the Error and Status after Error API calls.
      * @param error Error.
      */
-    error(error) {
+    static error(error) {
         this.error = error;
         this.status = error.status;
+    }
+
+    /**
+     * Perform a GET request to the endpoint (path) provided.
+     * @param path String for the endpoint.
+     * @returns {Q.Promise<void>}
+     */
+    static get(path) {
+        return axios.request({
+            method: 'GET',
+            url: path
+        })
+            .then(response => this.success(response))
+            .catch(error => this.error(error));
     }
 
     /**
      * Perform a POST request to the endpoint (path) with the payload data (body).
      * @param path String for the endpoint.
      * @param payload Json for the body data.
-     * @returns {Promise.<TResult>} Returning Promise.
+     * @returns {Q.Promise<void>}
      */
-    post(path, payload) {
-        return this.service.request({
+    static post(path, payload) {
+        return axios.request({
             method: 'POST',
             url: path,
-            responseType: 'json',
             data: payload
-        }).then(response => this.success(response))
-            .catch(error => this.error(error));
-    }
-
-    /**
-     * Perform a GET request to the endpoint (path) provided.
-     * @param path String for the endpoint.
-     * @returns {Promise.<TResult>} Returning Promise.
-     */
-    get(path) {
-        return this.service.request({
-            method: 'GET',
-            url: path,
-            responseType: 'json'
-        }).then(response => this.success(response))
+        })
+            .then(response => this.success(response))
             .catch(error => this.error(error));
     }
 
@@ -85,31 +76,31 @@ class RequestManager {
      * Perform a PUT request to the endpoint (path) provided with the payload (body).
      * @param path String for the endpoint.
      * @param payload Json for the body data.
-     * @returns {Promise.<TResult>} Returning Promise.
+     * @returns {Q.Promise<void>}
      */
-    put(path, payload) {
-        return this.service.request({
+    static put(path, payload) {
+        return axios.request({
             method: 'PUT',
             url: path,
-            responseType: 'json',
             data: payload
-        }).then(response => this.success(response))
+        })
+            .then(response => this.success(response))
             .catch(error => this.error(error));
     }
 
     /**
      * Perform a DELETE request to the endpoint (path) provided.
      * @param path String for the endpoint.
-     * @returns {Promise.<TResult>} Returning Promise.
+     * @returns {Q.Promise<void>}
      */
-    del(path) {
-        return this.service.request({
+    static del(path) {
+        return axios.request({
             method: 'DELETE',
-            url: path,
-            responseType: 'json'
-        }).then(response => this.success(response))
+            url: path
+        })
+            .then(response => this.success(response))
             .catch(error => this.error(error));
     }
 }
 
-module.exports = new RequestManager();
+module.exports = RequestManager;
