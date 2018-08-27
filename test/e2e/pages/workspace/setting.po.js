@@ -5,7 +5,7 @@ const Common = require('../common');
 /**
  * Page Object for WorkSpace.
  */
-class Workspace {
+class WorkspaceSetting {
 
     /**
      * Constructor initializing all WebElements.
@@ -47,7 +47,7 @@ class Workspace {
      * @returns {*} Promise.
      */
     setWorkSpaceNameInputField(workspaceName) {
-        return Common.setInputField(this.workSpacesNameEdit, workspaceName);
+        return Common.setValue(this.workSpacesNameEdit, workspaceName);
     }
 
     /**
@@ -59,4 +59,4 @@ class Workspace {
     }
 }
 
-module.exports = new Workspace();
+module.exports = WorkspaceSetting;

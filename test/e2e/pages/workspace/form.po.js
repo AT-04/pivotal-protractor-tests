@@ -39,4 +39,4 @@ class WorkspaceForm {
     }
 }
 
-module.exports = new WorkspaceForm();
+module.exports = WorkspaceForm;

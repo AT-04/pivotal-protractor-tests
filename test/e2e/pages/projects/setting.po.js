@@ -25,30 +25,32 @@ class ProjectSetting {
      * @returns {*} Promise.
      */
     setProjectNameInputField(projectName) {
-        return Common.setInputField(this.projectNameInputField, projectName);
+        return Common.setValue(this.projectNameInputField, projectName);
     }
 
     /**
      * Click the Delete Label Button.
-     * @returns {Promise.<TResult>} Promise.
+     * @returns {Q.Promise<any> | promise.Promise<any> | PromiseLike<any | never> | promise.Promise<any | never> | Q.IPromise<any>}
      */
     clickDeleteLabel() {
         return browser.executeScript('document.getElementById("delete_link").scrollIntoView();')
-            .then(() => this.deleteLabel.click());
+            .then(() => Common.click(this.deleteLabel));
     }
 
     /**
      * Click the Confirm Delete Button.
+     * @returns {Q.Promise<any>}
      */
     clickConfirmDeleteButton() {
-        return this.confirmDeleteButton.click();
+        return Common.click(this.confirmDeleteButton);
     }
 
     /**
      * Click the Save Button.
+     * @returns {Q.Promise<void>}
      */
     clickSaveButton() {
-        return this.saveButton.click()
+        return Common.click(this.saveButton)
             .then(() => browser.switchTo().alert().accept());
     }
 
@@ -59,34 +61,6 @@ class ProjectSetting {
     getChangesSuccessText() {
         return this.changesSuccessLabel.getText();
     }
-
-    /**
-     * Modify the Project Name value.
-     * @param name Project Name value.
-     * @returns {Promise.<TResult>} Promise.
-     */
-    modifyProjectName(name) {
-        return this.setProjectNameInputField(name)
-            .then(() => this.clickSaveButton());
-    }
-
-    /**
-     * Check if the Error Messages Displayed.
-     * @returns {*} Boolean if visible or not.
-     */
-    isErrorMessageDisplayed() {
-        return this.errorMessage.isVisible();
-    }
-
-    /**
-     * Click on Delete Project.
-     * @returns {Promise.<TResult>} Project.
-     */
-    deleteProject() {
-        return this.clickDeleteLabel()
-            .then(() => this.clickConfirmDeleteButton());
-    }
-
 }
 
-module.exports = new ProjectSetting();
+module.exports = ProjectSetting;
