@@ -10,7 +10,7 @@ exports.config = {
         }
     },
 
-    specs: ['./test/**/specs/**.spec.js'],
+    specs: ['./**/specs/**.spec.js'],
 
     framework: 'jasmine',
 
