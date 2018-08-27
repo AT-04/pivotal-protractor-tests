@@ -37,4 +37,4 @@ class Workspace {
     }
 }
 
-module.exports = new Workspace();
+module.exports = Workspace;

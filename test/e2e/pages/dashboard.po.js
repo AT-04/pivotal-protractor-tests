@@ -1,58 +1,64 @@
 'use strict';
 
+const Common = require('./common');
+
 /**
  * Page Object for Dashboard.
  */
-class pivotalDashboardPage {
+class Dashboard {
 
     /**
      * Constructor initializing all WebElements.
      */
     constructor() {
-
-        this.profileButton = $('a[data-aid=\'ProfileDropdown__profile\']');
-        this.projectButton = element(by.id('create-project-button'));
-        this.createWorkspace = element(by.css('.tc_projects_menu_item.tc_projects_menu_callout.tc_create_workspace'));
-        this.noticeMessage = element(by.id('notice'));
+        this.profileButton = $('a[data-aid="ProfileDropdown__profile"]');
+        this.projectButton = $('#create-project-button');
+        this.createWorkspace = $('.tc_projects_menu_item.tc_projects_menu_callout.tc_create_workspace');
+        this.noticeMessage = $('#notice');
     }
 
     /**
      * Click the Project button.
+     * @returns {Q.Promise<any>}
      */
     clickProjectButton() {
-        return this.projectButton.click();
+        return Common.click(this.projectButton);
     }
 
     /**
      * Click the Project Setting found by specific name.
      * @param name String.
+     * @returns {Q.Promise<any>}
      */
     clickProjectSettings(name) {
         this.xpath = `//a[text()='${name}']/following::a[contains(@class,'SettingsIcon')]`;
-        return element(by.xpath(this.xpath)).click();
+        return Common.click(element(by.xpath(this.xpath)));
     }
 
     /**
      * Click the Profile Button.
+     * @returns {Q.Promise<any>}
      */
     clickProfileButton() {
-        return this.profileButton.click();
+        return Common.click(this.profileButton);
     }
 
     /**
      * Click the Project Name by name provided.
      * @param name Name value.
+     * @returns {Q.Promise<any>}
      */
     clickProjectName(name) {
         this.xpath = `//a[text()='${name}']`;
-        return element(by.xpath(this.xpath)).click();
+        return Common.click(element(by.xpath(this.xpath)));
     }
 
     /**
      * Click the New WorkSpace button.
+     * @returns {Q.Promise<any>}
      */
     clickNewWorkspace() {
-        return this.createWorkspace.click();
+        return Common.click(this.createWorkspace);
     }
 
     /**
@@ -64,4 +70,4 @@ class pivotalDashboardPage {
     }
 }
 
-module.exports = new pivotalDashboardPage();
+module.exports = Dashboard;

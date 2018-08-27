@@ -13,9 +13,8 @@ The following main features are implemented in this framework.
 
 Acceptance tests.
 
-    -Login
-    -Projects
-    -Workspaces
+    - Projects
+    - Workspaces
 
 REQUIREMENTS AND SET CONFIGURATIONS
 -----------------------------------
@@ -23,7 +22,7 @@ REQUIREMENTS AND SET CONFIGURATIONS
 The required configuration for this framework is the following:
 
     -WebStorm IDE.
-    -Download npm 6.x or superior: https://nodejs.org/en/download/
+    -Download npm 8.x or superior: https://nodejs.org/en/download/
     -Clone/download the project from GitHub repository: https://github.com/AT-04/pivotal-protractor-tests
 
 Once those requirements are done, follow these steps:
@@ -52,7 +51,7 @@ To execute by command line you can use the following:
         ```javascript
 
         npm install
-        npm run test
+        npm test
 
         ```
 CONTACTS
@@ -60,18 +59,3 @@ CONTACTS
 
     -If you want to be informed about new code releases, bug fixes, security fixes, general news and information about
     pivotal-tests project check to the GitHub repository https://github.com/AT-04/pivotal-protractor-tests
-
-CONTRIBUTORS
-------------
-
-Current contributors:
-
-    -Abel Barrientos (Sphinix27) - [a link](https://github.com/Sphinix27)
-    -Cynthia Terrazas  (CynthiaTerrazas) - [a link](https://github.com/CynthiaTerrazas)
-    -Carlos Gonzales (carledriss) - [a link](https://github.com/carledriss)
-    -Juan Jose Torrez (JoseTorrez) - [a link](https://github.com/JoseTorrez)
-    -Marcos Lara (marcos-x86) - [a link](https://github.com/marcos-x86)
-    -Ovidio Miranda (OvidioMiranda) - [a link](https://github.com/OvidioMiranda)
-    -Richard Severiche (RichardSeverich) - [a link](https://github.com/RichardSeverich)
-    -Sergio Navarro (GioSerden) - [a link](https://github.com/GioSerden)
-    -Yury Ortu?o (yuryver) - [a link](https://github.com/yuryver)

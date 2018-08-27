@@ -1,21 +1,27 @@
 'use strict';
 
-const loginPage = require('../pages/login.po');
-const dashboardPage = require('../pages/dashboard.po');
 const requestManager = require('../../api/request.manager');
-const project = require('../pages/projects/projects.po');
-const projectForm = require('../pages/projects/form.po');
 const navigator = require('../pages/navigator');
+const SignIn = require('../pages/sigin.po');
+const Dashboard = require('../pages/dashboard.po');
+const ProjectForm = require('../pages/projects/form.po');
+const Project = require('../pages/projects/project.po');
 
 describe('Create Project', () => {
+
+    const signIn = new SignIn();
+    const dashboard = new Dashboard();
+    const projectForm = new ProjectForm();
+    const project = new Project();
+
     beforeEach(async () => {
-        await loginPage.loginAs(browser.params.username, browser.params.password);
+        await signIn.loginAs(browser.params.username, browser.params.password);
         await navigator.goesToDashboard();
     });
 
     it('Create a project', async () => {
         let projectName = 'NewDemoProject';
-        await dashboardPage.clickProjectButton();
+        await dashboard.clickProjectButton();
         await projectForm.setNameInputField(projectName);
         await projectForm.setTxtSelectorAccountSpecific('account1');
         await projectForm.clickCreateProjectButton();

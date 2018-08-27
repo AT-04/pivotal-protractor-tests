@@ -1,6 +1,6 @@
 'use strict';
 
-let axios = require('axios');
+const axios = require('axios');
 
 /**
  * Request manager class with Axios for API calls.

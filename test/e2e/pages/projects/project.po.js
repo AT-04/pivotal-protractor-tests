@@ -54,4 +54,4 @@ class Project {
     }
 }
 
-module.exports = new Project();
+module.exports = Project;

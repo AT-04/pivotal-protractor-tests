@@ -1,15 +1,20 @@
 'use strict';
 
-const loginPage = require('../pages/login.po');
-const dashboardPage = require('../pages/dashboard.po');
 const requestManager = require('../../api/request.manager');
-const projectSetting = require('../pages/projects/setting.po');
 const navigator = require('../pages/navigator');
+const SignIn = require('../pages/sigin.po');
+const Dashboard = require('../pages/dashboard.po');
+const ProjectSetting = require('../pages/projects/setting.po');
 
 describe('Edit Projects', () => {
+
     let id;
+    const signIn = new SignIn();
+    const dashboard = new Dashboard();
+    const projectSetting = new ProjectSetting();
+
     beforeAll(async () => {
-        await loginPage.loginAs(browser.params.username, browser.params.password);
+        await signIn.loginAs(browser.params.username, browser.params.password);
     });
 
     beforeEach(async () => {
@@ -20,7 +25,7 @@ describe('Edit Projects', () => {
     });
 
     it('Edit the project', async () => {
-        await dashboardPage.clickProjectSettings('demoProject');
+        await dashboard.clickProjectSettings('demoProject');
         await projectSetting.setProjectNameInputField('demoProjectUpdated');
         await projectSetting.clickSaveButton();
         expect(await projectSetting.getChangesSuccessText()).toContain('Changes saved.');

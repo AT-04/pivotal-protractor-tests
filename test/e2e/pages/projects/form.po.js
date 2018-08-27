@@ -23,53 +23,57 @@ class ProjectForm {
     /**
      * Set the Name Input Field with the string provided.
      * @param projectName String with Project Name.
-     * @returns {*} Promise.
+     * @returns {Q.Promise<any>}
      */
     setNameInputField(projectName) {
-        return Common.setInputField(this.projectNameInputField, projectName);
+        return Common.setValue(this.projectNameInputField, projectName);
     }
 
     /**
      * Click the Account Select Field.
+     * @returns {Q.Promise<any>}
      */
     clickAccountSelector() {
-        return this.accountSelect.click();
+        return Common.click(this.accountSelect);
     }
 
     /**
      * Set the Account Name Field with the value provided.
      * @param accountName String with Account value.
-     * @returns {*} Promise.
+     * @returns {Q.Promise<any>}
      */
     setNewAccountNameInputField(accountName) {
-        return Common.setInputField(this.newAccountNameInputField, accountName);
+        return Common.setValue(this.newAccountNameInputField, accountName);
     }
 
     /**
      * Click the Create Project Button.
+     * @returns {Q.Promise<any>}
      */
     clickCreateProjectButton() {
-        return this.createProjectButton.click();
+        return Common.click(this.createProjectButton);
     }
 
     /**
      * Click the Private Radio Button.
+     * @returns {Q.Promise<any>}
      */
     clickPrivateRadioButton() {
-        return this.privateRadioButton.click();
+        return Common.click(this.privateRadioButton);
     }
 
     /**
      * Click the create new account Select Option.
+     * @returns {Q.Promise<any>}
      */
     clickCreateNewAccountSelectOption() {
-        return this.createNewAccountSelectOption.click();
+        return Common.click(this.createNewAccountSelectOption);
     }
 
     /**
      * Click on Create New Account Select Option and set the value.
      * @param accountName String with Account value.
-     * @returns {Promise.<TResult>} Promise.
+     * @returns {Q.Promise<any>}
      */
     setTxtSelectorAccountSpecific(accountName) {
         return this.clickAccountSelector()
@@ -78,4 +82,4 @@ class ProjectForm {
     }
 }
 
-module.exports = new ProjectForm();
+module.exports = ProjectForm;
