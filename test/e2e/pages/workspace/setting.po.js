@@ -11,51 +11,43 @@ class WorkspaceSetting {
      * Constructor initializing all WebElements.
      */
     constructor() {
-
         this.workSpacesNameEdit = element(by.id('workspace_name'));
         this.saveWorkspaceEditedbutton = element(by.className('save_bar__submit'));
         this.deleteLabel = element(by.id('delete_link'));
         this.confirmDeleteButton = element(by.id('confirm_delete'));
-        this.changesSuccessLabel = $('div[id=save_success_bar] > div');
-
     }
 
     /**
      * Click the Save Button WorkSpace for Edit.
+     * @returns {Promise<void>}
      */
-    clickSaveButtonWorkspaceEdited() {
-        return this.saveWorkspaceEditedbutton.click();
+    async clickSaveButtonWorkspaceEdited() {
+        await Common.click(this.saveWorkspaceEditedbutton);
     }
 
     /**
      * Click the Delete Label.
+     * @returns {Promise<void>}
      */
-    clickDeleteLabel() {
-        return this.deleteLabel.click();
+    async clickDeleteLabel() {
+        await Common.click(this.deleteLabel);
     }
 
     /**
      * Click the Confirm Delete Button.
+     * @returns {Promise<void>}
      */
-    clickConfirmDeleteButton() {
-        return this.confirmDeleteButton.click();
+    async clickConfirmDeleteButton() {
+        await Common.click(this.confirmDeleteButton);
     }
 
     /**
      * Set the Name for WorkSpace Input Field with value provided.
      * @param workspaceName Name for Workspace.
-     * @returns {*} Promise.
+     * @returns {Promise<void>}
      */
-    setWorkSpaceNameInputField(workspaceName) {
-        return Common.setValue(this.workSpacesNameEdit, workspaceName);
-    }
-
-    /**
-     * Get the Message Changes Success label.
-     * @returns {string} Message of Success.
-     */
-    getChangesSuccessText() {
-        return this.changesSuccessLabel.getText();
+    async setWorkSpaceNameInputField(workspaceName) {
+        await Common.setValue(this.workSpacesNameEdit, workspaceName);
     }
 }
 
