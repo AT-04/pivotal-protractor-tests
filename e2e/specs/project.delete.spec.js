@@ -1,6 +1,6 @@
 'use strict';
 
-const requestManager = require('../../api/request.manager');
+const requestManager = require('../../rest/request.manager');
 const navigator = require('../pages/navigator');
 
 describe('Delete Projects', () => {
