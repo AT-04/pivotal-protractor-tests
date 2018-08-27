@@ -1,5 +1,7 @@
 'use strict';
 
+const Common = require('../common');
+
 /**
  * Page Object for WorkSpace.
  */
@@ -14,26 +16,19 @@ class Workspace {
     }
 
     /**
-     * Get the Page title of WorkSpaces.
-     * @returns {*} Title as String.
-     */
-    getPageTitle() {
-        return browser.getTitle();
-    }
-
-    /**
      * Get the WorkSpace Title.
-     * @returns {string} Title value.
+     * @returns {Promise<void>}
      */
-    getWorkspaceTitle() {
-        return this.workSpacesName.getText();
+    async getWorkspaceTitle() {
+        await this.workSpacesName.getText();
     }
 
     /**
      * Click Settings Nav Tab.
+     * @returns {Promise<void>}
      */
-    clickSettingsNavTab() {
-        return this.settingWorkspace.click();
+    async clickSettingsNavTab() {
+        await Common.click(this.settingWorkspace);
     }
 }
 

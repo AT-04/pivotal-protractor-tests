@@ -16,49 +16,48 @@ class ProjectSetting {
         this.changesSuccessLabel = $('#save_success_bar > div');
         this.projectNameInputField = element(by.id('project_name'));
         this.saveButton = element(by.className('save_bar__submit'));
-        this.errorMessage = element(by.className('error_above_or_below'));
     }
 
     /**
      * Set the Project Name Input Field with the value provided.
      * @param projectName Project Name Value.
-     * @returns {*} Promise.
+     * @returns {Promise<void>}
      */
-    setProjectNameInputField(projectName) {
-        return Common.setValue(this.projectNameInputField, projectName);
+    async setProjectNameInputField(projectName) {
+        await Common.setValue(this.projectNameInputField, projectName);
     }
 
     /**
      * Click the Delete Label Button.
-     * @returns {Q.Promise<any> | promise.Promise<any> | PromiseLike<any | never> | promise.Promise<any | never> | Q.IPromise<any>}
+     * @returns {Promise<void>}
      */
-    clickDeleteLabel() {
-        return browser.executeScript('document.getElementById("delete_link").scrollIntoView();')
-            .then(() => Common.click(this.deleteLabel));
+    async clickDeleteLabel() {
+        await browser.executeScript('document.getElementById("delete_link").scrollIntoView();');
+        await Common.click(this.deleteLabel);
     }
 
     /**
      * Click the Confirm Delete Button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickConfirmDeleteButton() {
-        return Common.click(this.confirmDeleteButton);
+    async clickConfirmDeleteButton() {
+        await Common.click(this.confirmDeleteButton);
     }
 
     /**
      * Click the Save Button.
-     * @returns {Q.Promise<void>}
+     * @returns {Promise<void>}
      */
-    clickSaveButton() {
-        return Common.click(this.saveButton)
-            .then(() => browser.switchTo().alert().accept());
+    async clickSaveButton() {
+        await Common.click(this.saveButton);
+        await browser.switchTo().alert().accept();
     }
 
     /**
      * Get the Message Changes Success label.
-     * @returns {string} Message of Success.
+     * @returns {Promise<*>}
      */
-    getChangesSuccessText() {
+    async getChangesSuccessText() {
         return this.changesSuccessLabel.getText();
     }
 }

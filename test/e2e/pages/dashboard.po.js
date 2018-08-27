@@ -1,6 +1,8 @@
 'use strict';
 
 const Common = require('./common');
+const ProjectForm = require('./projects/form.po');
+const ProjectSetting = require('./projects/setting.po');
 
 /**
  * Page Object for Dashboard.
@@ -19,53 +21,55 @@ class Dashboard {
 
     /**
      * Click the Project button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<ProjectForm>}
      */
-    clickProjectButton() {
-        return Common.click(this.projectButton);
+    async clickProjectButton() {
+        await Common.click(this.projectButton);
+        return new ProjectForm();
     }
 
     /**
      * Click the Project Setting found by specific name.
      * @param name String.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<ProjectSetting>}
      */
-    clickProjectSettings(name) {
+    async clickProjectSettings(name) {
         this.xpath = `//a[text()='${name}']/following::a[contains(@class,'SettingsIcon')]`;
-        return Common.click(element(by.xpath(this.xpath)));
+        await Common.click(element(by.xpath(this.xpath)));
+        return new ProjectSetting();
     }
 
     /**
      * Click the Profile Button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickProfileButton() {
-        return Common.click(this.profileButton);
+    async clickProfileButton() {
+        await Common.click(this.profileButton);
     }
 
     /**
      * Click the Project Name by name provided.
      * @param name Name value.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickProjectName(name) {
+    async clickProjectName(name) {
         this.xpath = `//a[text()='${name}']`;
-        return Common.click(element(by.xpath(this.xpath)));
+        await Common.click(element(by.xpath(this.xpath)));
     }
 
     /**
      * Click the New WorkSpace button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickNewWorkspace() {
-        return Common.click(this.createWorkspace);
+    async clickNewWorkspace() {
+        await Common.click(this.createWorkspace);
     }
 
     /**
      * Return the Notice Message.
-     * @returns {string} Notice Message value.
+     * @returns {Promise<*>}
      */
-    getNoticeMessage() {
+    async getNoticeMessage() {
         return this.noticeMessage.getText();
     }
 }

@@ -1,5 +1,7 @@
 'use strict';
 
+const Common = require('../common');
+
 /**
  * Page Object for WorkSpace Form.
  */
@@ -14,28 +16,20 @@ class WorkspaceForm {
     }
 
     /**
-     * Get the Page title of WorkSpaces.
-     * @returns {*} Title as String.
-     */
-    getPageTitle() {
-        return browser.getTitle();
-    }
-
-    /**
      * Set the WorkSpace Name provided.
      * @param name String Value.
-     * @returns {Promise.<TResult>} Promise.
+     * @returns {Promise<void>}
      */
-    setNameWorkspace(name) {
-        return this.workSpaceNameInputField.clear()
-            .then(() => this.workSpaceNameInputField.sendKeys(name));
+    async setNameWorkspace(name) {
+        await Common.setValue(this.workSpaceNameInputField, name);
     }
 
     /**
      * Click the Save Button for new WorkSpace.
+     * @returns {Promise<void>}
      */
-    clickSaveWorkspace() {
-        return this.createWorkSpaceBtn.click();
+    async clickSaveWorkspace() {
+        await Common.click(this.createWorkSpaceBtn);
     }
 }
 

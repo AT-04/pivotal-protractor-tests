@@ -1,6 +1,7 @@
 'use strict';
 
 const Common = require('../common');
+const Project = require('./project.po');
 
 /**
  * Page Object for Project Forms.
@@ -23,62 +24,62 @@ class ProjectForm {
     /**
      * Set the Name Input Field with the string provided.
      * @param projectName String with Project Name.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    setNameInputField(projectName) {
-        return Common.setValue(this.projectNameInputField, projectName);
+    async setNameInputField(projectName) {
+        await Common.setValue(this.projectNameInputField, projectName);
     }
 
     /**
      * Click the Account Select Field.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickAccountSelector() {
-        return Common.click(this.accountSelect);
+    async clickAccountSelector() {
+        await Common.click(this.accountSelect);
     }
 
     /**
      * Set the Account Name Field with the value provided.
      * @param accountName String with Account value.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    setNewAccountNameInputField(accountName) {
-        return Common.setValue(this.newAccountNameInputField, accountName);
+    async setNewAccountNameInputField(accountName) {
+        await Common.setValue(this.newAccountNameInputField, accountName);
     }
 
     /**
      * Click the Create Project Button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickCreateProjectButton() {
-        return Common.click(this.createProjectButton);
+    async clickCreateProjectButton() {
+        await Common.click(this.createProjectButton);
+        return new Project();
     }
 
     /**
      * Click the Private Radio Button.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickPrivateRadioButton() {
-        return Common.click(this.privateRadioButton);
+    async clickPrivateRadioButton() {
+        await Common.click(this.privateRadioButton);
     }
 
     /**
      * Click the create new account Select Option.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    clickCreateNewAccountSelectOption() {
-        return Common.click(this.createNewAccountSelectOption);
+    async clickCreateNewAccountSelectOption() {
+        await Common.click(this.createNewAccountSelectOption);
     }
 
     /**
      * Click on Create New Account Select Option and set the value.
-     * @param accountName String with Account value.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    setTxtSelectorAccountSpecific(accountName) {
-        return this.clickAccountSelector()
-            .then(() => this.clickCreateNewAccountSelectOption())
-            .then(() => this.setNewAccountNameInputField(accountName));
+    async setTxtSelectorAccountSpecific(accountName) {
+        await this.clickAccountSelector();
+        await this.clickCreateNewAccountSelectOption();
+        await this.setNewAccountNameInputField(accountName);
     }
 }
 

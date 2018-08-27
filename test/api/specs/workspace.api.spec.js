@@ -5,7 +5,8 @@ const requestManager = require('../request.manager');
 describe('Test all API request', () => {
     let id;
     it('Send a POST request to WorkSpaces', async () => {
-        await requestManager.post('/my/workspaces', {'name': 'MyWorkSpaces'});
+        let payload = {'name': 'MyWorkSpaces'};
+        await requestManager.post('/my/workspaces', payload);
         id = requestManager.getResponse().id;
         expect(requestManager.getStatus()).toBe(200);
     });

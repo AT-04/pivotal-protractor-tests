@@ -19,38 +19,21 @@ class SignIn {
     /**
      * Set the username Input Field.
      * @param name Value Provided.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    setName(name) {
-        return Common.setValue(this.nameInput, name)
-            .then(() => Common.click(this.loginButton));
+    async setName(name) {
+        await Common.setValue(this.nameInput, name);
+        await Common.click(this.loginButton);
     }
 
     /**
      * Set the password Input Field.
      * @param pass Value Provided.
-     * @returns {Q.Promise<any>}
+     * @returns {Promise<void>}
      */
-    setPassword(pass) {
-        return Common.setValue(this.passwordInput, pass)
-            .then(() => Common.click(this.loginButton));
-    }
-
-    /**
-     * Perform login if user is not logged.
-     * @param user Value for Username.
-     * @param pass Value for Password.
-     * @returns {Q.Promise<any> | promise.Promise<any> | PromiseLike<T | never> | promise.Promise<T | never> | Q.IPromise<any>}
-     */
-    loginAs(user, pass) {
-        browser.get(`${browser.params.baseUrl}/signin`);
-        return browser.getTitle()
-            .then(title => {
-                if (title === 'Pivotal Tracker - Sign in') {
-                    return this.setName(user)
-                        .then(() => this.setPassword(pass));
-                }
-            });
+    async setPassword(pass) {
+        await Common.setValue(this.passwordInput, pass);
+        await Common.click(this.loginButton);
     }
 }
 
