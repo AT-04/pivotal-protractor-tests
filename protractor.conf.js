@@ -1,5 +1,5 @@
 const { SpecReporter } = require('jasmine-spec-reporter');
-const json = require('./properties.json');
+const json = require('./environment.json');
 exports.config = {
     seleniumAddress: json.seleniumAddress,
 
@@ -10,7 +10,7 @@ exports.config = {
         }
     },
 
-    specs: ['./**/specs/**.spec.js'],
+    specs: ['./**/specs/**/**.spec.js'],
 
     framework: 'jasmine',
 

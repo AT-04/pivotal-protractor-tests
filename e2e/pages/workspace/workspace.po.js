@@ -1,6 +1,6 @@
 'use strict';
 
-const Common = require('../common');
+const Common = require('../../core/ui/common');
 
 /**
  * Page Object for WorkSpace.

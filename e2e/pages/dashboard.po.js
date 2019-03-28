@@ -1,6 +1,6 @@
 'use strict';
 
-const Common = require('./common');
+const Common = require('../core/ui/common');
 const ProjectForm = require('./projects/form.po');
 const ProjectSetting = require('./projects/setting.po');
 
