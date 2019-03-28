@@ -2,3 +2,4 @@
 /testresults/
 /node_modules/
 package-lock.json
+environment.json

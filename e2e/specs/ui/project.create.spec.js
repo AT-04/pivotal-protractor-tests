@@ -1,14 +1,16 @@
 'use strict';
 
-const requestManager = require('../../rest/request.manager');
-const navigator = require('../pages/navigator');
+const config = require('../../../environment.json');
+
+const requestManager = require('../../core/rest/request.manager');
+const navigator = require('../../pages/navigator');
 
 describe('Create Project', () => {
 
     let dashboard;
 
     beforeEach(async () => {
-        await navigator.loginAs(browser.params.username, browser.params.password);
+        await navigator.loginAs(config.username, config.password);
         dashboard = await navigator.goesToDashboard();
     });
 
@@ -22,9 +24,9 @@ describe('Create Project', () => {
     });
 
     afterEach(async () => {
-        await requestManager.get('/projects');
-        let id = requestManager.getResponse()[0].id;
-        await requestManager.del(`/projects/${id}`);
-        expect(await requestManager.getStatus()).toBe(204);
+        let response = await requestManager.get('/projects');
+        let id = response.data[0].id;
+        response = await requestManager.del(`/projects/${id}`);
+        expect(response.status).toBe(204);
     });
 });

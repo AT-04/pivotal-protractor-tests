@@ -1,7 +1,9 @@
 'use strict';
 
-const requestManager = require('../../rest/request.manager');
-const navigator = require('../pages/navigator');
+const config = require('../../../environment.json');
+
+const requestManager = require('../../core/rest/request.manager');
+const navigator = require('../../pages/navigator');
 
 describe('Delete Projects', () => {
 
@@ -9,13 +11,13 @@ describe('Delete Projects', () => {
     let dashboard;
 
     beforeAll(async () => {
-        await navigator.loginAs(browser.params.username, browser.params.password);
+        await navigator.loginAs(config.username, config.password);
     });
 
     beforeEach(async () => {
-        await requestManager.post('/projects', {'name': 'demoProject'});
-        id = requestManager.getResponse().id;
-        expect(await requestManager.getStatus()).toBe(200);
+        let response = await requestManager.post('/projects', {'name': 'demoProject'});
+        id = response.data.id;
+        expect(response.status).toBe(200);
         dashboard = await navigator.goesToDashboard();
     });
 

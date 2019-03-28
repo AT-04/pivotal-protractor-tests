@@ -1,8 +1,8 @@
 {
   "username": "",
   "password": "",
-  "token": "",
   "baseUrl": "https://www.pivotaltracker.com",
   "apiBaseUrl": "https://www.pivotaltracker.com/services/v5",
+  "token": "",
   "seleniumAddress": ""
 }
