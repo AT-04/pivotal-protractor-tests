@@ -27,10 +27,6 @@ exports.config = {
     },
 
     params: {
-        username: json.username,
-        password: json.password,
-        token: json.token,
         baseUrl: json.baseUrl,
-        apiBaseUrl: json.apiBaseUrl
     }
 };
